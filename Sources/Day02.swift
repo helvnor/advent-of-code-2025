@@ -45,7 +45,6 @@ public struct Day02 {
             return val
         }
 
-
         if (parts.allSatisfy { Int(String($0)) ?? 0 <= Int(String(parts.first!)) ?? 0 }) {
             let first = parts[0]
             for i in 0..<parts.count {
