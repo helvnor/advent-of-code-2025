@@ -28,5 +28,6 @@ struct AdventOfCode {
         print("Day 3:", Day03.run())
         print("Day 4:", Day04.run())
         print("Day 5:", Day05.run())
+        print("Day 6:", Day06.run())
     }
 }
