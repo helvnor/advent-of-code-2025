@@ -1,3 +1,5 @@
+import CoreFoundation
+
 extension Int {
     func pow(_ exponent: Int) -> Int {
         guard exponent >= 0 else { return 0 }
@@ -23,12 +25,44 @@ extension Int {
 struct AdventOfCode {
 
     static func main() {
-        print("Day 1:", Day01.run())
-        print("Day 2:", Day02.run())
-        print("Day 3:", Day03.run())
-        print("Day 4:", Day04.run())
-        print("Day 5:", Day05.run())
-        print("Day 6:", Day06.run())
-        print("Day 7:", Day07.run())
+        var startTime = CFAbsoluteTimeGetCurrent()
+        var dayRes = Day01.run()
+        var endTime = CFAbsoluteTimeGetCurrent()
+        print("Day 1 (\(endTime - startTime) seconds):", dayRes)
+
+        startTime = CFAbsoluteTimeGetCurrent()
+        dayRes = Day02.run()
+        endTime = CFAbsoluteTimeGetCurrent()
+        print("Day 2 (\(endTime - startTime) seconds):", dayRes)
+
+        startTime = CFAbsoluteTimeGetCurrent()
+        dayRes = Day03.run()
+        endTime = CFAbsoluteTimeGetCurrent()
+        print("Day 3 (\(endTime - startTime) seconds):", dayRes)
+
+        startTime = CFAbsoluteTimeGetCurrent()
+        dayRes = Day04.run()
+        endTime = CFAbsoluteTimeGetCurrent()
+        print("Day 4 (\(endTime - startTime) seconds):", dayRes)
+
+        startTime = CFAbsoluteTimeGetCurrent()
+        dayRes = Day05.run()
+        endTime = CFAbsoluteTimeGetCurrent()
+        print("Day 5 (\(endTime - startTime) seconds):", dayRes)
+
+        startTime = CFAbsoluteTimeGetCurrent()
+        dayRes = Day06.run()
+        endTime = CFAbsoluteTimeGetCurrent()
+        print("Day 6 (\(endTime - startTime) seconds):", dayRes)
+
+        startTime = CFAbsoluteTimeGetCurrent()
+        dayRes = Day07.run()
+        endTime = CFAbsoluteTimeGetCurrent()
+        print("Day 7 (\(endTime - startTime) seconds):", dayRes)
+
+        startTime = CFAbsoluteTimeGetCurrent()
+        dayRes = Day08.run()
+        endTime = CFAbsoluteTimeGetCurrent()
+        print("Day 8 (\(endTime - startTime) seconds):", dayRes)
     }
 }
