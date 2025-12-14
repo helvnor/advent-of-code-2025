@@ -126,25 +126,22 @@ public struct Day08 {
         var shortest: [(from: Int, to: Int, distance: Float)] = []
         for y in 0..<distances.count {
             for x in (1 + y)..<distances.count {
-                let distance = distances[y][x]
-                shortest.append((from: y, to: x, distance: distance))
+                shortest.append((from: y, to: x, distance: distances[y][x]))
             }
         }
+
         shortest = shortest.sorted { $0.distance < $1.distance }
 
         var groups: [Set<Int>] =
             shortest
-            .prefix(n)
+            .prefix(n - 1)
             .map { [$0.from, $0.to] }
 
         var nextIndex = n - 1
         var next: (from: Int, to: Int, distance: Float) = shortest[nextIndex]
 
-        let mainStartTime = CFAbsoluteTimeGetCurrent()
-
-        while true {
-
-            nextIndex += 1
+        var totalCount = groups.map { $0.count }.reduce(0, +)
+        while totalCount != coords.count {
             next = shortest[nextIndex]
 
             for g in groups {
@@ -154,23 +151,24 @@ public struct Day08 {
                 }
             }
 
-            groups.append(Set([next.from, next.to]))
-            for y in 0..<groups.count {
-                for x in (y + 1)..<groups.count {
-                    if !groups[y].isDisjoint(with: groups[x]) {
-                        groups[y] = groups[y].union(groups[x])
-                        groups[x] = []
+            var newGroup = Set([next.from, next.to])
+            var merge = true
+            while merge {
+                merge = false
+                for i in 0..<groups.count {
+                    if !groups[i].isDisjoint(with: newGroup) {
+                        newGroup = newGroup.union(groups[i])
+                        groups.remove(at: i)
+                        merge = true
+                        break
                     }
                 }
             }
-            groups = groups.filter { !$0.isEmpty }
-            let check = groups.map { $0.count }.reduce(0, +)
-            if check == coords.count {
-                break
-            }
+            groups.append(newGroup)
+
+            totalCount = groups.map { $0.count }.reduce(0, +)
+            nextIndex += 1
         }
-        let mainEndTime = CFAbsoluteTimeGetCurrent()
-        print("Time Main: \(mainEndTime - mainStartTime) seconds")
 
         let a = coords[next.from]
         let b = coords[next.to]
@@ -192,13 +190,13 @@ public struct Day08 {
         print("Part 1 ☝️: \(partOne(data: data, n: 1000))")
 
         let partTwoExpected = 25272
-        let partTwoResults = partTwo(data: testData, n: 2)
+        let partTwoResults = partTwo(data: testData, n: 10)
         if partTwoExpected != partTwoResults {
             print("Part 2 failed ✌️: \n\tExpected: \(partTwoExpected), Results: \(partTwoResults)")
             return ("Failed! ❌")
         }
 
-        print("Part 2 ✌️: \(partTwo(data: data, n: 1))")
+        print("Part 2 ✌️: \(partTwo(data: data, n: 1000))")
 
         return ("Completed! 🎉")
     }
