@@ -64,5 +64,10 @@ struct AdventOfCode {
         dayRes = Day08.run()
         endTime = CFAbsoluteTimeGetCurrent()
         print("Day 8 (\(endTime - startTime) seconds):", dayRes)
+
+        startTime = CFAbsoluteTimeGetCurrent()
+        dayRes = Day09.run()
+        endTime = CFAbsoluteTimeGetCurrent()
+        print("Day 9 (\(endTime - startTime) seconds):", dayRes)
     }
 }
